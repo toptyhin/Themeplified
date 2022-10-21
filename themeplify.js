@@ -5,8 +5,9 @@ function themeplifyRequire(packageName) {
 	return require(packageName);
 }
 
-const sass 	    = themeplifyRequire("gulp-sass");
-sass.compiler 	= themeplifyRequire("sass");
+// const sass 	    = themeplifyRequire("gulp-sass");
+// sass.compiler 	= themeplifyRequire("sass");
+const sass = require('gulp-sass')(require('sass'));
 
 global.themeplify = {
 	require: themeplifyRequire,
@@ -23,7 +24,7 @@ themeplify.packages = {
 	browserSync: themeplify.require("browser-sync"),
 	spawn: themeplify.require("cross-spawn"),
 	cssnano: themeplify.require("cssnano"),
-	fibers: themeplify.require("fibers"),
+	// fibers: themeplify.require("fibers"),
 	findRoot: themeplify.require("find-root"),
 	gulp: themeplify.require("gulp"),
 	cached: themeplify.require("gulp-cached"),

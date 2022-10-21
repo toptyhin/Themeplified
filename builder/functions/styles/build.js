@@ -2,7 +2,7 @@ const { themeRoot }		= themeplify;
 const {
 	gulp,
 	rename,
-	fibers,
+	// fibers,
 	plumber,
 	sass,
 	sourcemaps,
@@ -31,30 +31,31 @@ module.exports = (scssFiles = files.scss, options = {}) => {
 			.pipe(sourcemaps.init({
 				largeFile: true
 			}))
-			.pipe(
-				sass({
-					fiber: fibers,
-					outputStyle: "expanded",
-					sourceComments: false,
-					indentType: "tab",
-					indentWidth: 1,
-					includePaths: [
-						path.resolve(themeRoot, files.nodeModules)
-					],
-					importer: (url) => {
-						if(url.indexOf("~") !== 0) {
-							return {
-								file: url
-							};
-						}
+			// .pipe(
+			// 	sass({
+			// 		fiber: fibers,
+			// 		outputStyle: "expanded",
+			// 		sourceComments: false,
+			// 		indentType: "tab",
+			// 		indentWidth: 1,
+			// 		includePaths: [
+			// 			path.resolve(themeRoot, files.nodeModules)
+			// 		],
+			// 		importer: (url) => {
+			// 			if(url.indexOf("~") !== 0) {
+			// 				return {
+			// 					file: url
+			// 				};
+			// 			}
 
-						return {
-							file: path.resolve(themeRoot, files.nodeModules, url.substr(1))
-						};
-					}
-				})
-					.on('error', sass.logError)
-			)
+			// 			return {
+			// 				file: path.resolve(themeRoot, files.nodeModules, url.substr(1))
+			// 			};
+			// 		}
+			// 	})
+			// 		.on('error', sass.logError)
+			// )
+			.pipe(sass.sync())
 			.pipe(rename({
 				prefix: files.filePrefix || '',
 				suffix: '.build',
